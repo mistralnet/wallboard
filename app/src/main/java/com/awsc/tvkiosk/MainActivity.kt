@@ -11,6 +11,7 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Button
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
     private lateinit var progress: ProgressBar
+    private lateinit var settingsButton: Button
 
     private val handler = Handler(Looper.getMainLooper())
     private var loadedUrl: String = ""
@@ -32,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private val hideButton = Runnable { settingsButton.visibility = View.GONE }
+
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +43,14 @@ class MainActivity : AppCompatActivity() {
 
         webView = findViewById(R.id.webview)
         progress = findViewById(R.id.progress)
+        settingsButton = findViewById(R.id.settings_button)
+
+        // This is a signage display: the web page is not interactive, so keep
+        // focus off the WebView so the on-screen settings button is reachable.
+        webView.isFocusable = false
+        webView.isFocusableInTouchMode = false
+
+        settingsButton.setOnClickListener { openSettings() }
 
         with(webView.settings) {
             javaScriptEnabled = true
@@ -49,17 +61,20 @@ class MainActivity : AppCompatActivity() {
             cacheMode = WebSettings.LOAD_DEFAULT
             builtInZoomControls = false
             displayZoomControls = false
+            // Ignore the TV's system font-size setting (fixes "everything huge").
+            textZoom = 100
         }
 
-        // Keep all navigation inside the WebView (no external browser).
         webView.webViewClient = WebViewClient()
         webView.webChromeClient = WebChromeClient()
 
         loadHomeUrl()
+        showSettingsButton()
     }
 
     private fun loadHomeUrl() {
         loadedUrl = Prefs.getUrl(this)
+        webView.setInitialScale(Prefs.getZoom(this))
         progress.visibility = View.VISIBLE
         webView.loadUrl(loadedUrl)
         webView.postDelayed({ progress.visibility = View.GONE }, 1500)
@@ -73,16 +88,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /** Briefly reveal the settings button, then auto-hide to keep the board clean. */
+    private fun showSettingsButton() {
+        settingsButton.visibility = View.VISIBLE
+        settingsButton.requestFocus()
+        handler.removeCallbacks(hideButton)
+        handler.postDelayed(hideButton, 6000)
+    }
+
     override fun onResume() {
         super.onResume()
         enableImmersive()
 
         val currentUrl = Prefs.getUrl(this)
+        webView.setInitialScale(Prefs.getZoom(this))
         if (currentUrl != loadedUrl) {
-            // URL changed in settings — load the new page.
             loadHomeUrl()
         } else {
-            // Same page — refresh so returning to the app shows fresh content.
             webView.reload()
         }
         scheduleAutoRefresh()
@@ -117,7 +139,6 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             KeyEvent.KEYCODE_BACK -> {
-                // Track for a possible long-press (opens settings).
                 event.startTracking()
                 return true
             }
@@ -125,6 +146,14 @@ class MainActivity : AppCompatActivity() {
             KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> {
                 webView.reload()
                 return true
+            }
+            KeyEvent.KEYCODE_DPAD_UP,
+            KeyEvent.KEYCODE_DPAD_DOWN,
+            KeyEvent.KEYCODE_DPAD_LEFT,
+            KeyEvent.KEYCODE_DPAD_RIGHT,
+            KeyEvent.KEYCODE_DPAD_CENTER -> {
+                // Any navigation key reveals the settings button.
+                showSettingsButton()
             }
         }
         return super.onKeyDown(keyCode, event)
@@ -140,8 +169,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK && !event.isCanceled) {
-            // Short press: go back in web history, but never exit the kiosk.
-            if (webView.canGoBack()) webView.goBack()
+            // Short press never exits the kiosk; reveal the settings button instead.
+            showSettingsButton()
             return true
         }
         return super.onKeyUp(keyCode, event)
@@ -149,6 +178,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         handler.removeCallbacks(autoRefresh)
+        handler.removeCallbacks(hideButton)
         super.onDestroy()
     }
 }

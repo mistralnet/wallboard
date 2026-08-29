@@ -9,7 +9,12 @@
     <string name="interval_6">כל 6 שעות</string>
     <string name="interval_12">כל 12 שעות</string>
     <string name="interval_24">כל 24 שעות</string>
+    <string name="zoom_label">גודל תצוגה (זום)</string>
     <string name="save">שמור והצג</string>
     <string name="refresh_now">רענן עכשיו</string>
     <string name="hint_open_settings">לחיצה ארוכה על כפתור החזרה (Back) פותחת הגדרות</string>
+    <string name="update_section">עדכון הישום</string>
+    <string name="update_url_label">כתובת קובץ העדכון (APK)</string>
+    <string name="update_now">עדכן עכשיו (הורד והתקן)</string>
+    <string name="current_version">גרסה נוכחית</string>
 </resources>

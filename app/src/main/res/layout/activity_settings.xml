@@ -63,6 +63,28 @@
             <RadioButton android:id="@+id/interval_24" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/interval_24" android:textColor="#FFFFFF" android:textSize="18sp" android:paddingVertical="6dp" />
         </RadioGroup>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zoom_label"
+            android:textColor="#CFD8E0"
+            android:textSize="18sp"
+            android:paddingTop="28dp"
+            android:paddingBottom="8dp" />
+
+        <RadioGroup
+            android:id="@+id/zoom_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton android:id="@+id/zoom_75" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="75%" android:textColor="#FFFFFF" android:textSize="18sp" android:paddingHorizontal="12dp" />
+            <RadioButton android:id="@+id/zoom_90" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="90%" android:textColor="#FFFFFF" android:textSize="18sp" android:paddingHorizontal="12dp" />
+            <RadioButton android:id="@+id/zoom_100" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="100%" android:textColor="#FFFFFF" android:textSize="18sp" android:paddingHorizontal="12dp" />
+            <RadioButton android:id="@+id/zoom_110" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="110%" android:textColor="#FFFFFF" android:textSize="18sp" android:paddingHorizontal="12dp" />
+            <RadioButton android:id="@+id/zoom_125" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="125%" android:textColor="#FFFFFF" android:textSize="18sp" android:paddingHorizontal="12dp" />
+        </RadioGroup>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,6 +109,57 @@
                 android:text="@string/refresh_now"
                 android:textSize="18sp" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#2A3540"
+            android:layout_marginVertical="32dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_section"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:paddingBottom="6dp" />
+
+        <TextView
+            android:id="@+id/version_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#7A8794"
+            android:textSize="15sp"
+            android:paddingBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_url_label"
+            android:textColor="#CFD8E0"
+            android:textSize="18sp"
+            android:paddingBottom="8dp" />
+
+        <EditText
+            android:id="@+id/update_url_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textUri"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#7A8794"
+            android:hint="https://awsc.co.il/awsc-tv.apk"
+            android:background="#1C2530"
+            android:padding="16dp"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/update_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/update_now"
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
