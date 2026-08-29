@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AWSC TV</string>
+    <string name="settings_title">הגדרות</string>
+    <string name="url_label">כתובת העמוד להצגה</string>
+    <string name="interval_label">רענון אוטומטי</string>
+    <string name="interval_off">כבוי</string>
+    <string name="interval_1">כל שעה</string>
+    <string name="interval_3">כל 3 שעות</string>
+    <string name="interval_6">כל 6 שעות</string>
+    <string name="interval_12">כל 12 שעות</string>
+    <string name="interval_24">כל 24 שעות</string>
+    <string name="save">שמור והצג</string>
+    <string name="refresh_now">רענן עכשיו</string>
+    <string name="hint_open_settings">לחיצה ארוכה על כפתור החזרה (Back) פותחת הגדרות</string>
+</resources>
