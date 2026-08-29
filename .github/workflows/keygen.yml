@@ -1,0 +1,33 @@
+name: Generate Keystore
+
+on:
+  workflow_dispatch:
+
+jobs:
+  keygen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Generate keystore
+        env:
+          STORE_PW: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          KEY_PW: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+        run: |
+          keytool -genkeypair -v \
+            -keystore awsc-release.jks \
+            -alias "$ALIAS" \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass "$STORE_PW" -keypass "$KEY_PW" \
+            -dname "CN=AWSC TV, O=AWSC, C=IL"
+
+      - name: Upload keystore
+        uses: actions/upload-artifact@v4
+        with:
+          name: awsc-release-keystore
+          path: awsc-release.jks
