@@ -1,27 +1,25 @@
-# AWSC TV
+# Wallboard
 
-אפליקציית Android TV פרטית שמציגה עמוד אינטרנט אחד במסך מלא — לשימוש כתצוגת קיוסק / Digital Signage על טלוויזיה.
+A lightweight Android TV app that displays a single web page fullscreen — for use as a wall display / digital signage board.
 
-## תכונות
-- מסך מלא מוחלט (immersive), בלי סרגלים או כפתורי דפדפן.
-- כתובת העמוד ניתנת לשינוי מתוך מסך ההגדרות (ברירת מחדל: `https://awsc.co.il/`).
-- רענון אוטומטי במרווח שניתן להגדרה (כבוי / 1 / 3 / 6 / 12 / 24 שעות; ברירת מחדל 6 שעות).
-- רענון בכל חזרה לאפליקציה + כפתור רענון ידני.
-- המסך נשאר דלוק (keep-screen-on).
-- ניסיון עליה אוטומטית בהדלקת הטלוויזיה (best-effort).
+## Features
+- Full immersive fullscreen, no browser chrome.
+- Configurable page URL (set in the in-app settings screen).
+- Configurable auto-refresh interval (off / 1 / 3 / 6 / 12 / 24 hours).
+- Refresh on resume + manual refresh.
+- Display zoom control (75–125%).
+- Optional start-on-boot.
+- In-app updater: pulls the latest build from a configurable APK URL.
 
-## פתיחת הגדרות בשלט
-**לחיצה ארוכה על כפתור החזרה (Back)** פותחת את מסך ההגדרות. (גם כפתור MENU, אם קיים בשלט.)
+## Opening settings
+On the remote: **long-press the Back button** (or press MENU). An on-screen settings button also appears when you press any D-pad key.
 
-## בנייה
-הבנייה רצה אוטומטית ב-GitHub Actions בכל דחיפה ל-`main`.
-בסיום מתפרסם קובץ `awsc-tv.apk` תחת ה-Release בשם **latest**:
+## Build
+Builds run automatically via GitHub Actions on every push to `main`, producing a signed `wallboard.apk` published to the **latest** release:
 
 ```
-https://github.com/<user>/awsc-tv-kiosk/releases/latest/download/awsc-tv.apk
+https://github.com/mistralnet/wallboard/releases/latest/download/wallboard.apk
 ```
 
-## התקנה על הטלוויזיה (בלי Google Play)
-1. בטלוויזיה מתקינים מ-Google Play את האפליקציה **Downloader**.
-2. מזינים בה את כתובת ה-APK שלמעלה.
-3. מאשרים התקנה ממקור לא מוכר → Install.
+## Install (sideload)
+Point the in-app updater at the release URL above, or install the APK once via a sideload helper app on the TV.

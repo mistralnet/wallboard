@@ -14,7 +14,8 @@ object Prefs {
     const val DEFAULT_URL = "https://awsc.co.il/"
     const val DEFAULT_INTERVAL_HOURS = 6
     const val DEFAULT_ZOOM = 100
-    const val DEFAULT_UPDATE_URL = "https://awsc.co.il/awsc-tv.apk"
+    const val DEFAULT_UPDATE_URL =
+        "https://github.com/mistralnet/wallboard/releases/latest/download/wallboard.apk"
 
     private fun prefs(ctx: Context) =
         ctx.getSharedPreferences(FILE, Context.MODE_PRIVATE)
