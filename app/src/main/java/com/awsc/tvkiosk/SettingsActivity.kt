@@ -7,12 +7,14 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var urlInput: EditText
     private lateinit var intervalGroup: RadioGroup
     private lateinit var zoomGroup: RadioGroup
+    private lateinit var bootSwitch: SwitchCompat
     private lateinit var updateUrlInput: EditText
     private lateinit var updateButton: Button
 
@@ -23,12 +25,14 @@ class SettingsActivity : AppCompatActivity() {
         urlInput = findViewById(R.id.url_input)
         intervalGroup = findViewById(R.id.interval_group)
         zoomGroup = findViewById(R.id.zoom_group)
+        bootSwitch = findViewById(R.id.boot_switch)
         updateUrlInput = findViewById(R.id.update_url_input)
         updateButton = findViewById(R.id.update_button)
 
         urlInput.setText(Prefs.getUrl(this))
         intervalGroup.check(radioIdForHours(Prefs.getIntervalHours(this)))
         zoomGroup.check(radioIdForZoom(Prefs.getZoom(this)))
+        bootSwitch.isChecked = Prefs.isBootEnabled(this)
         updateUrlInput.setText(Prefs.getUpdateUrl(this))
 
         val version = try {
@@ -56,6 +60,7 @@ class SettingsActivity : AppCompatActivity() {
         Prefs.setUrl(this, url)
         Prefs.setIntervalHours(this, hoursForRadioId(intervalGroup.checkedRadioButtonId))
         Prefs.setZoom(this, zoomForRadioId(zoomGroup.checkedRadioButtonId))
+        Prefs.setBootEnabled(this, bootSwitch.isChecked)
 
         var updateUrl = updateUrlInput.text.toString().trim()
         if (updateUrl.isNotEmpty() &&

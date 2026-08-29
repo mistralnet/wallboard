@@ -10,6 +10,7 @@
     <string name="interval_12">כל 12 שעות</string>
     <string name="interval_24">כל 24 שעות</string>
     <string name="zoom_label">גודל תצוגה (זום)</string>
+    <string name="boot_label">הפעל אוטומטית בהדלקת הטלוויזיה</string>
     <string name="save">שמור והצג</string>
     <string name="refresh_now">רענן עכשיו</string>
     <string name="hint_open_settings">לחיצה ארוכה על כפתור החזרה (Back) פותחת הגדרות</string>

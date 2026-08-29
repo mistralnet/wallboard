@@ -63,6 +63,16 @@
             <RadioButton android:id="@+id/interval_24" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/interval_24" android:textColor="#FFFFFF" android:textSize="18sp" android:paddingVertical="6dp" />
         </RadioGroup>
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/boot_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/boot_label"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:paddingTop="28dp"
+            android:paddingBottom="4dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
